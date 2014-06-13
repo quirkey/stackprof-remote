@@ -47,7 +47,7 @@ module StackProf
       end
 
       def handle_stackprof(path)
-        sp = StackProf::Remote::ProcessReportCollector.new(options)
+        sp = StackProf::Remote::ProcessReportCollector.new(self.class.options)
         if path =~ /start/
           logger.debug "[stackprof] Starting StackProf"
           sp.start
