@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'stackprof/cli'
+
+StackProf::CLI.start(ARGV.shift)
+

@@ -2,6 +2,9 @@ source "http://rubygems.org"
 # Add dependencies required to use your gem here.
 # Example:
 #   gem "activesupport", ">= 2.3.5"
+gem "rbtrace", "~>0.4.3"
+gem "stackprof", "~>0.2.6"
+gem "pry"
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.

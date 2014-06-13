@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+# stackprof-remote
+require 'stackprof/remote/client'
+
+remote = StackProf::Remote::Client.new(ARGV.shift, ARGV.shift)
+remote.run
+
+
