@@ -3,9 +3,14 @@ require 'stackprof'
 
 module StackProf
   module Remote
+    # Middleware is a simple Rack middleware that handles requests to
+    # urls matching /__stackprof__ for starting/stopping a profile
+    # session and retreiving the dump files. It delegates to the
+    # ProcessReportCollector to do the actual work of collecting
+    # and combining the dumps.
     class Middleware
       class << self
-        attr_accessor :enabled, :mode, :interval, :path, :logger
+        attr_accessor :enabled, :logger, :options
 
         def enabled?(env)
           if enabled.respond_to?(:call)
@@ -18,9 +23,8 @@ module StackProf
 
       def initialize(app, options = {})
         @app       = app
-
-        Middleware.path     = options[:path] || 'tmp'
-        Middleware.logger   = options[:logger] || Logger.new(STDOUT)
+        self.class.logger   = options.delete(:logger) || Logger.new(STDOUT)
+        self.class.options  = options
         logger.info "[stackprof] Stackprof Middleware enabled"
       end
 
@@ -35,7 +39,7 @@ module StackProf
 
       private
       def logger
-        StackProf::Remote.logger
+        self.class.logger
       end
 
       def in_stackprof?(path)
@@ -43,9 +47,8 @@ module StackProf
       end
 
       def handle_stackprof(path)
-        sp = StackProf::ProcessReportCollector.new(:path => Middleware.path)
+        sp = StackProf::Remote::ProcessReportCollector.new(options)
         if path =~ /start/
-          # Stackprof start
           logger.debug "[stackprof] Starting StackProf"
           sp.start
           [200, {'Content-Type' => 'text/plain'}, ["StackProf Started"]]

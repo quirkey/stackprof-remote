@@ -12,27 +12,36 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.authors = ["Aaron Quint"]
   s.date = "2014-06-13"
-  s.description = "TODO: longer description of your gem"
+  s.description = "stackprof-remote consists of a middleware for easy creation and retreival of\n                       stackprof sampling profiler dumps from a remote machine, and a wrapper around\n                       pry (stackprof-cli) to create an interactive session for navigating stackprof\n                       dumps."
   s.email = "aaron@quirkey.com"
+  s.executables = ["stackprof-cli", "stackprof-remote"]
   s.extra_rdoc_files = [
     "LICENSE.txt",
-    "README.rdoc"
+    "README.md"
   ]
   s.files = [
     ".document",
     "Gemfile",
+    "Gemfile.lock",
     "LICENSE.txt",
-    "README.rdoc",
+    "README.md",
     "Rakefile",
     "VERSION",
+    "bin/stackprof-cli",
+    "bin/stackprof-remote",
     "lib/stackprof-remote.rb",
+    "lib/stackprof/cli.rb",
+    "lib/stackprof/remote/client.rb",
+    "lib/stackprof/remote/middleware.rb",
+    "lib/stackprof/remote/process_report_collector.rb",
+    "stackprof-remote.gemspec",
     "test/helper.rb",
     "test/test_stackprof-remote.rb"
   ]
   s.homepage = "http://github.com/quirkey/stackprof-remote"
   s.licenses = ["MIT"]
   s.rubygems_version = "2.2.1"
-  s.summary = "TODO: one-line summary of your gem"
+  s.summary = "A Middleware and CLI for fetching and interacting with StackProf dumps"
 
   if s.respond_to? :specification_version then
     s.specification_version = 4

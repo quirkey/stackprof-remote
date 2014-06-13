@@ -1,9 +1,11 @@
 require 'net/http'
 require 'fileutils'
-require_relative '../cli'
+require 'stackprof/cli'
 
 module StackProf
   module Remote
+    # Client wraps the script that uses net/http to make the start/stop
+    # requests to a host running the StackProf::Remote::Middleware
     class Client
       attr_reader :host
 

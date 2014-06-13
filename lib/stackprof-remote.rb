@@ -1,1 +1,2 @@
-require 'stackprof/remote'
+require 'stackprof/remote/middleware'
+require 'stackprof/remote/client'

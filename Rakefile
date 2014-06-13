@@ -17,8 +17,11 @@ Jeweler::Tasks.new do |gem|
   gem.name = "stackprof-remote"
   gem.homepage = "http://github.com/quirkey/stackprof-remote"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{A Middleware and CLI for fetching and interacting with StackProf dumps}
+  gem.description = %Q{stackprof-remote consists of a middleware for easy creation and retreival of
+                       stackprof sampling profiler dumps from a remote machine, and a wrapper around
+                       pry (stackprof-cli) to create an interactive session for navigating stackprof
+                       dumps.}
   gem.email = "aaron@quirkey.com"
   gem.authors = ["Aaron Quint"]
   # dependencies defined in Gemfile
