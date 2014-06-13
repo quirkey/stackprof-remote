@@ -14,7 +14,7 @@ StackProf is amazing (BIG UPS TO @TMM1) but is not very operator friendly when i
 
 ## Usage
 
-1. Add the Middleware to your app. 
+1 - Add the Middleware to your app. 
 
 ``` ruby
 # rails 2.3 style
@@ -29,8 +29,8 @@ end
 ActionController::Dispatcher.middleware.use StackProf::Remote::Middleware, enabled: enabled, logger: Rails.logger
 ```
 
-2. Run/restart your app.
-3. Attach to your application. 
+2 - Run/restart your app.
+3 - Attach to your application. 
 
 ``` bash
 $ stackprof-remote localhost 
