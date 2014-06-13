@@ -4,7 +4,7 @@ A Middleware and CLI for fetching and interacting with [StackProf](https://githu
 
 ## Description
 
-stackprof-remote consists of a middleware for easy creation and retreival of StackProf sampling profiler dumps from a remote machine, and a wrapper around pry (stackprof-cli) to create an interactive session for navigating dump files.
+stackprof-remote consists of a middleware for easy creation and retrieval of StackProf sampling profiler dumps from a remote machine, and a wrapper around pry (stackprof-cli) to create an interactive session for navigating dump files.
 
 Currently, this is aimed at Rails apps running with unicorn, but there are options that should make it usable with any Rack app. In the future, I'd like to see it work with Resque and non-rack applications, too.
 
@@ -57,7 +57,7 @@ stackprof> top 5
 
 ## CLI
 
-At the end of `stackprof-remote` it actually just enters a seperate process `stackprof-cli`. This is a wrapper around [pry](https://github.com/pry/pry) that loads the dump file in an interactive session. It gives you a number of methods to interact with the dump:
+At the end of `stackprof-remote` it actually just enters a separate process `stackprof-cli`. This is a wrapper around [pry](https://github.com/pry/pry) that loads the dump file in an interactive session. It gives you a number of methods to interact with the dump:
 
 * top N: show the top methods ordered by inner sample time.
 * total N: show the top methods ordered by total time.
@@ -70,7 +70,7 @@ You can use `stackprof-cli` on its own by calling `stackprof-cli [dump-name]`
 
 - You should use `enabled` on the Middleware to lock this down in production environments.
 - Collecting dumps uses [`rbtrace`](https://github.com/tmm1/rbtrace) to execute the stackprof methods against the pool of unicorns running. If you're running something other than `unicorn` or you mess with the procline, you'll need to set the `:pid_finder` option.
-- In order to get line level code output when using the `method` view you need to execute `stackprof-cli` in the same directory structure that your unicorn runs in. This doesnt necessiarly mean the same server - we use remote dumps and inspect them in our local Vagrant environments that have the same directory structure.
+- In order to get line level code output when using the `method` view you need to execute `stackprof-cli` in the same directory structure that your unicorn runs in. This doesn't necessarily mean the same server - we use remote dumps and inspect them in our local Vagrant environments that have the same directory structure.
 
 ## Requirements
 
