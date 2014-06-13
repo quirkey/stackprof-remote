@@ -73,7 +73,7 @@ module StackProf
             tracer = RBTracer.new(pid)
             output = tracer.eval(command)
           ensure
-            tracer.detach
+            tracer.detach if tracer
             output
           end
         end

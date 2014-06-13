@@ -24,7 +24,7 @@ module StackProf
 
       def initialize(app, options = {})
         @app       = app
-        self.class.logger   = options.delete(:logger) || Logger.new(STDOUT)
+        self.class.logger   = options[:logger] || Logger.new(STDOUT)
         self.class.options  = options
         logger.info "[stackprof] Stackprof Middleware enabled"
       end
