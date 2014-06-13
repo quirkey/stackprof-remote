@@ -1,5 +1,6 @@
 require 'fileutils'
 require 'stackprof'
+require 'stackprof/remote/process_report_collector'
 
 module StackProf
   module Remote
