@@ -40,7 +40,7 @@ module StackProf
 
       def fetch_results
         response = Net::HTTP.get_response(host, "/__stackprof__/stop")
-        if response.code == 200
+        if response.code == '200'
           @results = response.body
           if !@results
             raise "Could not retreive results"

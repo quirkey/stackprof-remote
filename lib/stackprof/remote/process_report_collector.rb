@@ -55,7 +55,11 @@ module StackProf
 
       def self.report_from_marshaled_results(marshaled_data)
         data = Marshal.load(marshaled_data)
-        report = data.inject(nil) {|sum, d| sum ? StackProf::Report.new(d) + sum : StackProf::Report.new(d) }
+        if data.is_a?(Array)
+          data.inject(nil) {|sum, d| sum ? StackProf::Report.new(d) + sum : StackProf::Report.new(d) }
+        else
+          StackProf::Report.new(d)
+        end
       end
 
       private
