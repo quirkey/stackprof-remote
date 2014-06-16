@@ -48,7 +48,11 @@ module StackProf
         if @saved_files
           logger.info "[stackprof] Saved Files #{@saved_files.inspect}"
           saved_data = @saved_files.collect {|f|
-            Marshal.load(File.read(f)) if File.readable?(f)
+            if File.readable?(f)
+               Marshal.load(File.read(f))
+            else
+              logger.info "[stackprof] Could not read file #{f}: #{File.stat(f)}"
+            end
           }.compact
           Marshal.dump(saved_data)
         end
