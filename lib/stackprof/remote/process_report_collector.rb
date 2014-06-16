@@ -46,11 +46,12 @@ module StackProf
 
       def marshaled_results
         if @saved_files
-          sleep 1
           logger.info "[stackprof] Saved Files #{@saved_files.inspect}"
           saved_data = @saved_files.collect {|f|
             if File.readable?(f)
                Marshal.load(File.read(f))
+            else
+              logger.error "[stackprof] File #{f} not readable by process #{Process.pid}"
             end
           }.compact
           Marshal.dump(saved_data)
