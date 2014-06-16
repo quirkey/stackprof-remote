@@ -46,8 +46,9 @@ module StackProf
 
       def marshaled_results
         if @saved_files
-          logger.info "[stackprof] Saved Files #{@saved_files.inspect}"
+          logger.debug "[stackprof] Saved Files #{@saved_files.inspect}"
           saved_data = @saved_files.collect {|f|
+            f = f.gsub(/"/,'') # RBTrace returns double quoted strings
             if File.readable?(f)
                Marshal.load(File.read(f))
             else
