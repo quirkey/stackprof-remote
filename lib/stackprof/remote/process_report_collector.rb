@@ -46,9 +46,10 @@ module StackProf
 
       def marshaled_results
         if @saved_files
+          logger.info "[stackprof] Saved Files #{@saved_files.inspect}"
           saved_data = @saved_files.collect {|f|
             Marshal.load(File.read(f)) if File.readable?(f)
-          }
+          }.compact
           Marshal.dump(saved_data)
         end
       end
@@ -56,7 +57,8 @@ module StackProf
       def self.report_from_marshaled_results(marshaled_data)
         data = Marshal.load(marshaled_data)
         if data.is_a?(Array)
-          data.inject(nil) {|sum, d| sum ? StackProf::Report.new(d) + sum : StackProf::Report.new(d) }
+          puts "Loading results from #{data.length} workers"
+          data.inject(nil) {|sum, d| (sum && d) ? StackProf::Report.new(d) + sum : StackProf::Report.new(d) }
         else
           StackProf::Report.new(d)
         end

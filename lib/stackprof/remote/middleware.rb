@@ -77,11 +77,11 @@ module StackProf
         if results = marshaled_results
           FileUtils.mkdir_p(base_path)
           filename = "stackprof-#{Process.pid}-#{Time.now.to_i}.dump"
-          path     = File.expand_path(File.join(base_path, filename))
+          path     = File.join(base_path, filename)
           File.open(path, 'wb') do |f|
             f.write results
           end
-          path
+          File.readable?(path) ? path : nil
         end
       end
     end
