@@ -39,10 +39,17 @@ module StackProf
       end
 
       def fetch_results
-        @results = Net::HTTP.get(host, "/__stackprof__/stop")
-        puts "[#{host}] Results: #{@results.bytesize / 1024}kb"
-        if !@results
-          raise "Could not retreive results"
+        response = Net::HTTP.get_response(host, "/__stackprof__/stop")
+        if response.code == 200
+          @results = response.body
+          if !@results
+            raise "Could not retreive results"
+          end
+          puts "[#{host}] Results: #{@results.bytesize / 1024}kb"
+        else
+          puts "[#{host}] Returned a #{response.code} response"
+          puts response.body
+          raise "Bad Response"
         end
       end
 

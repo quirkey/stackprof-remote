@@ -47,7 +47,7 @@ module StackProf
       def marshaled_results
         if @saved_files
           saved_data = @saved_files.collect {|f|
-            Marshal.load(File.read(f))
+            Marshal.load(File.read(f)) if File.readable?(f)
           }
           Marshal.dump(saved_data)
         end
@@ -73,7 +73,7 @@ module StackProf
             tracer = RBTracer.new(pid)
             output = tracer.eval(command)
           ensure
-            tracer.detach if tracer
+            tracer.detach
             output
           end
         end
