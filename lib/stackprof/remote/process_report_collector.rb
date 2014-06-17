@@ -62,7 +62,6 @@ module StackProf
       def self.report_from_marshaled_results(marshaled_data)
         data = Marshal.load(marshaled_data)
         if data.is_a?(Array)
-          puts "Loading results from #{data.length} workers"
           data.compact.inject(nil) do |sum, d|
             sum ? StackProf::Report.new(d) + sum : StackProf::Report.new(d)
           end
