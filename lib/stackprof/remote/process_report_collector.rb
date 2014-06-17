@@ -63,7 +63,9 @@ module StackProf
         data = Marshal.load(marshaled_data)
         if data.is_a?(Array)
           puts "Loading results from #{data.length} workers"
-          data.inject(nil) {|sum, d| (sum && d) ? StackProf::Report.new(d) + sum : StackProf::Report.new(d) }
+          data.compact.inject(nil) do |sum, d|
+            sum ? StackProf::Report.new(d) + sum : StackProf::Report.new(d)
+          end
         else
           StackProf::Report.new(d)
         end
