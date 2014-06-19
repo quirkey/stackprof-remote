@@ -25,13 +25,14 @@ module StackProf
       def initialize(app, options = {})
         @app       = app
         self.class.logger   = options[:logger] || Logger.new(STDOUT)
+        self.class.enabled  = options[:enabled] || false
         self.class.options  = options
         logger.info "[stackprof] Stackprof Middleware enabled"
       end
 
       def call(env)
         path = env['PATH_INFO']
-        if in_stackprof?(path)
+        if self.class.enabled?(env) && in_stackprof?(path)
           handle_stackprof(path)
         else
           @app.call(env)
