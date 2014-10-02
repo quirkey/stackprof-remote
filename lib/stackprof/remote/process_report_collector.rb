@@ -66,7 +66,7 @@ module StackProf
             sum ? StackProf::Report.new(d) + sum : StackProf::Report.new(d)
           end
         else
-          StackProf::Report.new(d)
+          StackProf::Report.new(data)
         end
       end
 
