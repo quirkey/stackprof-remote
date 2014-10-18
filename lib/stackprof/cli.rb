@@ -30,8 +30,11 @@ module StackProf
         Pry::Commands.block_command "all", "print all results by sample time" do
           session.with_context(self) {|s| s.all }
         end
-        Pry::Commands.block_command "method", "scope results to matching matching methods" do |method|
+        Pry::Commands.block_command "method", "scope results to matching methods" do |method|
           session.with_context(self) {|s| s.print_method(method) }
+        end
+        Pry::Commands.block_command "file", "scope results to matching file" do |method|
+          session.with_context(self) {|s| s.print_file(method) }
         end
       end
 
@@ -80,6 +83,14 @@ module StackProf
         check_for_report
         page do |out|
           @report.print_method(method, out)
+        end
+      end
+
+      def print_file(file)
+        check_for_report
+
+        page do |out|
+          @report.print_file(file, out)
         end
       end
 
